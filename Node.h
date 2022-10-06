@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "Polish.h"
+#pragma once
 using namespace std;
 
 class Node{
