@@ -11,4 +11,5 @@ class Node{
         Node* next;
         Node(Polish* data, Node* next);
         void showData();
+        Polish* getData();
 };

@@ -14,9 +14,10 @@ int main(){
     getline(cin, polishExpression);
     
     list->split(polishExpression);
-    list->printNodes();
-    cout << "------------------------------------------" << endl;
     list->reverseList(auxiliaryList);
-    auxiliaryList->printNodes();
+
+    string result = auxiliaryList->solveNotation();
+    cout << result << endl;
+
     return 0;
 }

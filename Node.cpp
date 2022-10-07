@@ -12,3 +12,7 @@ Node::Node(Polish* data, Node* next){
 void Node::showData(){
     cout << this->data->getNotation() << endl;
 }
+
+Polish* Node::getData(){
+    return this->data;
+}

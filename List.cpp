@@ -5,6 +5,10 @@
 #include "List.h"
 using namespace std;
 
+Node* List::getHead(){
+    return this->head;
+}
+
 void List::pushNode(Node* data){
     data->next = this->head;
     this->head = data;
@@ -45,3 +49,39 @@ void List::reverseList(List* aux){
     }
 }
 
+string List::solveNotation(){
+    float answer;
+    string number1 = this->pop()->getData()->getNotation();
+    float firstMainNumber = stof(number1);
+    string number2;
+    float secondNumber;
+
+    while(this->getHead() != NULL){
+        number2 = this->pop()->getData()->getNotation();
+        secondNumber = stof(number2);
+
+        Node* symbol;
+        answer = operation(firstMainNumber, secondNumber, symbol);
+        if(answer == -1){
+            return "Systax Error";
+            break;
+        }
+        firstMainNumber = answer;
+    }
+    return to_string(answer);
+}
+
+float List::operation(float num1, float num2, Node* symbol){
+    string charStr = symbol->getData()->getNotation();
+    if(charStr == "+"){
+        return num1 + num2;
+    }else if(charStr == "-"){
+        return num1 - num2;
+    }else if(charStr == "*"){
+        return num1 * num2;
+    }else if(charStr == "/"){
+        return num1 / num2;
+    }else{
+        return -1;
+    }
+}
