@@ -16,7 +16,7 @@ int main(){
     list->split(polishExpression);
     list->reverseList(auxiliaryList);
 
-    string result = auxiliaryList->solveNotation();
+    float result = auxiliaryList->solveNotation();
     cout << result << endl;
 
     return 0;

@@ -49,37 +49,34 @@ void List::reverseList(List* aux){
     }
 }
 
-string List::solveNotation(){
+float List::solveNotation(){
     float answer;
-    string number1 = this->pop()->getData()->getNotation();
-    float firstMainNumber = stof(number1);
-    string number2;
-    float secondNumber;
+    float firstMainNumber = stof(this->pop()->getData()->getNotation());
 
     while(this->getHead() != NULL){
-        number2 = this->pop()->getData()->getNotation();
-        secondNumber = stof(number2);
+        float secondNumber = stof(this->pop()->getData()->getNotation());
 
-        Node* symbol;
+        string symbol = this->pop()->getData()->getNotation();
         answer = operation(firstMainNumber, secondNumber, symbol);
         if(answer == -1){
-            return "Systax Error";
+            cout << "Systax Error" << endl;
             break;
+        }else{
+            firstMainNumber = answer;
         }
-        firstMainNumber = answer;
     }
-    return to_string(answer);
+
+    return answer;
 }
 
-float List::operation(float num1, float num2, Node* symbol){
-    string charStr = symbol->getData()->getNotation();
-    if(charStr == "+"){
+float List::operation(float num1, float num2, string symbol){
+    if(symbol == "+"){
         return num1 + num2;
-    }else if(charStr == "-"){
+    }else if(symbol == "-"){
         return num1 - num2;
-    }else if(charStr == "*"){
+    }else if(symbol == "*"){
         return num1 * num2;
-    }else if(charStr == "/"){
+    }else if(symbol == "/"){
         return num1 / num2;
     }else{
         return -1;

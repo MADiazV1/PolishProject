@@ -18,6 +18,6 @@ class List{
         void printNodes();
         void split(string str);
         void reverseList(List* list);
-        string solveNotation();
-        float operation(float num1, float num2, Node* symbol);
+        float solveNotation();
+        float operation(float num1, float num2, string symbol);
 };
