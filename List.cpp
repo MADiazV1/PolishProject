@@ -28,9 +28,43 @@ void List::printNodes(){
     }
 }
 
+bool List::evaluateExpresion(string str){
+    char delim = ' ';
+    int values = 0;
+
+    for(int i=0;i<str.length();i++){
+        if(str[i]!=delim){
+            values++;
+        }
+    }
+
+    int count = 0;
+    int valueCount = 0;
+    char validChars[14] = {'1','2','3','4','5','6','7','8','9','0','+','-','*','/'};
+    for(int i=0;i<str.length();i++){
+        for(int j=0;j<14;j++){
+            if(str[i]==validChars[j]){
+                count++;
+                valueCount++;
+                break;
+            }else if(str[i]==delim){
+                continue;
+            }
+        }
+    }
+    if(count!=0 && values == valueCount){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 void List::split(string str){
     char delim = ' ';
     string temp = "";
+    if(str[0] == delim){
+        str = str.substr(1,str.length());
+    }
     for(int i=0; i<=(int)str.size(); i++){
         if(str[i] == delim || i == str.length()){
             this->pushNode(new Node(new Polish(temp), NULL));
@@ -55,17 +89,10 @@ float List::solveNotation(){
 
     while(this->getHead() != NULL){
         float secondNumber = stof(this->pop()->getData()->getNotation());
-
         string symbol = this->pop()->getData()->getNotation();
         answer = operation(firstMainNumber, secondNumber, symbol);
-        if(answer == -1){
-            cout << "Systax Error" << endl;
-            break;
-        }else{
-            firstMainNumber = answer;
-        }
+        firstMainNumber = answer;
     }
-
     return answer;
 }
 

@@ -16,6 +16,7 @@ class List{
         void pushNode(Node* data);
         Node* pop();
         void printNodes();
+        bool evaluateExpresion(string str);
         void split(string str);
         void reverseList(List* list);
         float solveNotation();
