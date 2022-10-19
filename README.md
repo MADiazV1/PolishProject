@@ -23,3 +23,9 @@ The program has three classes: "Polish", "Node", and "List". Each one has its "a
 # Clone this project since your Git Bash
 git clone https://github.com/MADiazV1/PolishProject.git
 ```
+<p style="
+    font-size:15px;
+">
+You can prove and modify cloning this project to your liking. 
+Thank you for making me a review.
+</p>
