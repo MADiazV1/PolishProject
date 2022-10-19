@@ -32,6 +32,13 @@ bool List::evaluateExpresion(string str){
     char delim = ' ';
     int values = 0;
 
+    if(str[0] == delim){
+        str = str.substr(1,str.length());
+    }
+    if(str[str.length()] == delim){
+        str = str.substr(0, str.length()-1);
+    }
+
     for(int i=0;i<str.length();i++){
         if(str[i]!=delim){
             values++;
@@ -52,7 +59,8 @@ bool List::evaluateExpresion(string str){
             }
         }
     }
-    if(count!=0 && values == valueCount){
+
+    if(count!=0 && values == valueCount && (str[str.length()-1] == '+' || str[str.length()-1] == '-' || str[str.length()-1] == '*' || str[str.length()-1] == '/')){
         return true;
     }else{
         return false;
@@ -62,9 +70,6 @@ bool List::evaluateExpresion(string str){
 void List::split(string str){
     char delim = ' ';
     string temp = "";
-    if(str[0] == delim){
-        str = str.substr(1,str.length());
-    }
     for(int i=0; i<=(int)str.size(); i++){
         if(str[i] == delim || i == str.length()){
             this->pushNode(new Node(new Polish(temp), NULL));
@@ -83,17 +88,25 @@ void List::reverseList(List* aux){
     }
 }
 
-float List::solveNotation(){
-    float answer;
-    float firstMainNumber = stof(this->pop()->getData()->getNotation());
+string List::solveNotation(){
+    try{
+        string answerString = "";
+        float answer;
+        float firstMainNumber = stof(this->pop()->getData()->getNotation());
 
-    while(this->getHead() != NULL){
-        float secondNumber = stof(this->pop()->getData()->getNotation());
-        string symbol = this->pop()->getData()->getNotation();
-        answer = operation(firstMainNumber, secondNumber, symbol);
-        firstMainNumber = answer;
+        while(this->getHead() != NULL){
+            float secondNumber = stof(this->pop()->getData()->getNotation());
+            string symbol = this->pop()->getData()->getNotation();
+            answer = operation(firstMainNumber, secondNumber, symbol);
+            firstMainNumber = answer;
+        }
+        answerString = to_string(answer);
+        answerString = answerString.substr(0, answerString.find(".")+3);
+        return "Answer: " + answerString;
+    }catch(exception e){
+        e.what();
+        return "Invalid expression";
     }
-    return answer;
 }
 
 float List::operation(float num1, float num2, string symbol){
@@ -106,6 +119,6 @@ float List::operation(float num1, float num2, string symbol){
     }else if(symbol == "/"){
         return num1 / num2;
     }else{
-        return -1;
+        return 0;
     }
 }

@@ -17,11 +17,10 @@ int main(){
     if(list->evaluateExpresion(polishExpression)){
         list->split(polishExpression);
         list->reverseList(auxiliaryList);
-        float result = auxiliaryList->solveNotation();
-        cout << "Answer: " << result << endl;
+        string result = auxiliaryList->solveNotation();
+        cout << result << endl;
     }else{
         cout << "Invalid expression" << endl;
     }
-
     return 0;
 }

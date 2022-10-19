@@ -19,6 +19,6 @@ class List{
         bool evaluateExpresion(string str);
         void split(string str);
         void reverseList(List* list);
-        float solveNotation();
+        string solveNotation();
         float operation(float num1, float num2, string symbol);
 };
